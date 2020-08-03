@@ -96,32 +96,32 @@ public class Prompter {
 
 extension Prompter {
 
-    private func ask<T>(text: String, type: QuestionType<T>, message: String?, block: Block?) -> Result<T> {
+    private func ask<T>(_ text: String, type: QuestionType<T>, message: String?, block: Block?) -> Result<T> {
         display(text, type: type)
         return input(type, message: message, block: block)
     }
 
-    private func input<T>(type: QuestionType<T>, message: String?, block: Block?) -> Result<T> {
+    private func input<T>(_ type: QuestionType<T>, message: String?, block: Block?) -> Result<T> {
         let msg = message != nil ? message! : defaultMessage
 
-        guard let data = readLine(stripNewline: true) else {
+        guard let data = readLine(strippingNewline: true) else {
             return invalidResponse(type, message: msg, block: block)
         }
 
         if let result = type.result(data) {
-            block?(result.value as! AnyObject)
+            block?(result.value as AnyObject)
             return result
         }
 
         return invalidResponse(type, message: msg, block: block)
     }
 
-    private func invalidResponse<T>(type: QuestionType<T>, message: String, block: Block?) -> Result<T> {
+    private func invalidResponse<T>(_ type: QuestionType<T>, message: String, block: Block?) -> Result<T> {
         showMessage(message)
         return input(type, message: message, block: block)
     }
 
-    private func display<T>(text: String, type: QuestionType<T>) {
+    private func display<T>(_ text: String, type: QuestionType<T>) {
         print(text)
 
         if let options = type.options {
@@ -129,11 +129,11 @@ extension Prompter {
         }
     }
 
-    private func displayOptions(list: [String]) {
-        list.enumerate().forEach { print("[\($0+1)] \($1) ") }
+    private func displayOptions(_ list: [String]) {
+        list.enumerated().forEach { print("[\($0+1)] \($1) ") }
     }
 
-    private func showMessage(text: String) {
+    private func showMessage(_ text: String) {
         print("*** \(text) ***")
     }
 }
@@ -158,7 +158,7 @@ private enum QuestionType<T> {
         }
     }
 
-    func result(input: Choice) -> Result<T>? {
+    func result(_ input: Choice) -> Result<T>? {
 
         var result: T?
 
@@ -167,7 +167,10 @@ private enum QuestionType<T> {
         case .Int:          result =  input.int as? T
         case .Bool:         result = input.bool as? T
         case .SingleChoice:
-            if let int = input.int, options = self.options, item = options.getAtIndex(int - 1) {
+            if let int = input.int, 
+               let options = self.options, 
+               let item = options.getAt(index: int - 1)
+            {
                 result = (int - 1, item) as? T
             }
         }

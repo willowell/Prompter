@@ -5,6 +5,7 @@
 //  Created by Matthew on 12/01/2016.
 //  Copyright © 2016 Matthew Clarkson. All rights reserved.
 //
+import Prompter
 
 import Nimble
 import Quick
@@ -54,15 +55,15 @@ class ExtensionsSpec: QuickSpec {
             let array = ["a", "b", "c"]
 
             it("getAtIndex successfulluy") {
-                expect(array.getAtIndex(0)) == "a"
+                expect(array.getAt(index: 0)) == "a"
             }
 
             it("getAtIndex negative index") {
-                expect(array.getAtIndex(-1)).to(beNil())
+                expect(array.getAt(index: -1)).to(beNil())
             }
 
             it("getAtIndex non existent index") {
-                expect(array.getAtIndex(-3)).to(beNil())
+                expect(array.getAt(index: -3)).to(beNil())
             }
 
         }

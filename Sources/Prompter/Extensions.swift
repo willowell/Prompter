@@ -8,9 +8,9 @@
 
 extension String {
 
-    var bool: Bool? {
+    public var bool: Bool? {
 
-        switch self.lowercaseString {
+        switch self.lowercased() {
         case "true", "t", "y", "yes", "1":
             return true
         case  "false", "f", "n", "no", "0":
@@ -20,15 +20,21 @@ extension String {
         }
     }
 
-    var int: Int? {
+    public var int: Int? {
         return Int(self)
     }
 }
 
 extension Array {
 
-    func getAtIndex(index: Int?) -> Element? {
-        guard let index = index where index >= 0 else { return nil }
-        return index <= self.count - 1 ? self[index] : nil
+    public func getAt(index: Int?) -> Element? {
+        guard let index = index, 
+            0 <= index && index <= count - 1
+        else { 
+            return nil 
+        }
+        return index <= self.count - 1 
+            ? self[index] 
+            : nil
     }
 }
