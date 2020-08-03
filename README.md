@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/Prompter.svg?style=flat)](http://cocoapods.org/pods/Prompter)
 [![Platform](https://img.shields.io/cocoapods/p/Prompter.svg?style=flat)](http://cocoapods.org/pods/Prompter)
 
-Prompter is lightweight Swift 2+ library that greatly simplifies capturing user input for command line (cli) applications on OSX and Linux.
+Prompter is lightweight Swift 5+ library that greatly simplifies capturing user input for command line (cli) applications on OSX and Linux.
 
 Specifically, it allows you to prompt the user for input and validate that responses are (currently) `String`, `Int`, `Bool`, or a valid single choice from a given list.
 
@@ -19,7 +19,7 @@ To add Prompter via the SPM, add the following to your `Package.swift` file:
 let package = Package(
     name: "YourPackageName"
     dependencies: [
-        .Package(url: "https://github.com/mpclarkson/Prompter.git", majorVersion: 1),
+        .package(url: "https://github.com/mpclarkson/Prompter.git", from: "1.0.0"),
     ]
 )
 ```
@@ -87,6 +87,12 @@ Run the tests using xctool:
 
 ```bash
 xctool -workspace Prompter.xcworkspace -scheme Prompter test
+```
+
+Or with `swift test`:
+```bash
+cd Prompter
+swift test
 ```
 
 ## Author
